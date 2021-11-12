@@ -1,5 +1,7 @@
 # VMware-Go-KCL
 
+[![vmware-go-kcl-v2](https://github.com/fafg/vmware-go-kcl/actions/workflows/vmware-go-kcl-v2-ci.yml/badge.svg)](https://github.com/fafg/vmware-go-kcl/actions/workflows/vmware-go-kcl-v2-ci.yml)
+
 ## Overview
 
 [Amazon Kinesis](https://aws.amazon.com/kinesis/data-streams/)  enables real-time processing of streaming data at massive scale. Kinesis Streams is useful for rapidly moving data off data producers and then continuously processing the data, be it to transform the data before emitting to a data store, run real-time metrics and analytics, or derive more complex data streams for further processing.
