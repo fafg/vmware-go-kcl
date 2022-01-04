@@ -171,12 +171,8 @@ func (w *Worker) initialize() error {
 		cfg, err := awsConfig.LoadDefaultConfig(
 			context.TODO(),
 			awsConfig.WithRegion(w.regionName),
-			awsConfig.WithCredentialsProvider(
-				credentials.NewStaticCredentialsProvider(
-					w.kclConfig.KinesisCredentials.Value.AccessKeyID,
-					w.kclConfig.KinesisCredentials.Value.SecretAccessKey,
-					w.kclConfig.KinesisCredentials.Value.SessionToken)),
-			awsConfig.WithEndpointResolver(resolver),
+			awsConfig.WithCredentialsProvider(w.kclConfig.KinesisCredentials),
+			awsConfig.WithEndpointResolverWithOptions(resolver),
 			awsConfig.WithRetryer(func() aws.Retryer {
 				return retry.AddWithMaxBackoffDelay(retry.NewStandard(), retry.DefaultMaxBackoff)
 			}),
