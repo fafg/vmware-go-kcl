@@ -42,8 +42,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/credentials"
-
 	"github.com/vmware/vmware-go-kcl/clientlibrary/metrics"
 	"github.com/vmware/vmware-go-kcl/logger"
 )
@@ -173,10 +171,10 @@ type (
 		KinesisEndpoint string
 
 		// KinesisCredentials is used to access Kinesis
-		KinesisCredentials *credentials.StaticCredentialsProvider
+		KinesisCredentials aws.CredentialsProvider
 
 		// DynamoDBCredentials is used to access DynamoDB
-		DynamoDBCredentials *credentials.StaticCredentialsProvider
+		DynamoDBCredentials aws.CredentialsProvider
 
 		// TableName is name of the dynamo db table for managing kinesis stream default to ApplicationName
 		TableName string

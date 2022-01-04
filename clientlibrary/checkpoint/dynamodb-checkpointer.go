@@ -38,7 +38,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	awsConfig "github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 
@@ -102,11 +101,7 @@ func (checkpointer *DynamoCheckpoint) Init() error {
 		cfg, err := awsConfig.LoadDefaultConfig(
 			context.TODO(),
 			awsConfig.WithRegion(checkpointer.kclConfig.RegionName),
-			awsConfig.WithCredentialsProvider(
-				credentials.NewStaticCredentialsProvider(
-					checkpointer.kclConfig.DynamoDBCredentials.Value.AccessKeyID,
-					checkpointer.kclConfig.DynamoDBCredentials.Value.SecretAccessKey,
-					checkpointer.kclConfig.DynamoDBCredentials.Value.SessionToken)),
+			awsConfig.WithCredentialsProvider(checkpointer.kclConfig.DynamoDBCredentials),
 			awsConfig.WithEndpointResolver(resolver),
 			awsConfig.WithRetryer(func() aws.Retryer {
 				return retry.AddWithMaxBackoffDelay(retry.NewStandard(), retry.DefaultMaxBackoff)
